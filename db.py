@@ -1,13 +1,22 @@
 import mysql.connector
+from dotenv import load_dotenv
 from models.teams import teams
 from models.league import leagues
 from models.positions import positions
+from os import environ
+
+load_dotenv()
+
 
 def db():
     data = mysql.connector.connect(
-        host="localhost", user="root", password="12345", database="tablas_db"
+        host=environ.get("DB_HOST"),
+        user=environ.get("DB_USER"),
+        password=environ.get("DB_PASS"),
+        database=environ.get("DB_NAME"),
     )
     return data
+
 
 def create_tables():
     conn = db()
@@ -17,4 +26,3 @@ def create_tables():
     cur.execute(positions)
     cur.close()
     conn.close()
-
