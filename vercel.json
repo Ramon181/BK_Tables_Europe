@@ -1,0 +1,8 @@
+{
+  "functions": {
+    "api": {
+      "handler": "app",
+      "memory": 512
+    }
+  }
+}
