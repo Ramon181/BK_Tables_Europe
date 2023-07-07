@@ -9,13 +9,12 @@ load_dotenv()
 
 def db():
     data = mysql.connector.connect(
-        host=environ.get("DB_HOST"),
-        user=environ.get("DB_USER"),
-        password=environ.get("DB_PASS"),
-        database=environ.get("DB_NAME"),
+        host=environ.get("DB_HOST", "localhost"),
+        user=environ.get("DB_USER", "root"),
+        password=environ.get("DB_PASS", "12345"),
+        database=environ.get("DB_NAME", "tablas_db"),
     )
     return data
-
 
 def create_tables():
     conn = db()
@@ -25,3 +24,4 @@ def create_tables():
     cur.execute(positions)
     cur.close()
     conn.close()
+
