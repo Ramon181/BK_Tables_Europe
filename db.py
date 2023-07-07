@@ -1,16 +1,18 @@
 import mysql.connector
+from os import environ
+from dotenv import load_dotenv
 from models.teams import teams
 from models.league import leagues
 from models.positions import positions
 
-
+load_dotenv()
 
 def db():
     data = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="12345",
-        database="tablas_db",
+        host=environ.get("DB_HOST"),
+        user=environ.get("DB_USER"),
+        password=environ.get("DB_PASS"),
+        database=environ.get("DB_NAME"),
     )
     return data
 
