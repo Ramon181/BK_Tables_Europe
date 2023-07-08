@@ -14,7 +14,7 @@ def get_positions():
         # Realizar una consulta JOIN para obtener las posiciones con las relaciones
         query = """
         SELECT p.id, l.league_name, t.team_name, t.position, t.matches_played, t.games_won,
-               t.games_matches, t.lost_games, t.goals_in_favor, t.goals_against, t.points
+               t.games_drawn, t.games_lost, t.goals_for, t.goals_against, t.points
         FROM positions p
         JOIN teams t ON p.team_id = t.id
         JOIN leagues l ON p.league_id = l.id
@@ -33,9 +33,9 @@ def get_positions():
                 "position": position[3],
                 "matches_played": position[4],
                 "games_won": position[5],
-                "games_matches": position[6],
-                "lost_games": position[7],
-                "goals_in_favor": position[8],
+                "games_drawn": position[6],
+                "games_lost": position[7],
+                "goals_for": position[8],
                 "goals_against": position[9],
                 "points": position[10],
             }
@@ -85,23 +85,23 @@ def post_positions():
             position = team_data.get("position")
             matches_played = team_data.get("matches_played")
             games_won = team_data.get("games_won")
-            games_matches = team_data.get("games_matches")
-            lost_games = team_data.get("lost_games")
-            goals_in_favor = team_data.get("goals_in_favor")
+            games_drawn = team_data.get("games_drawn")
+            games_lost = team_data.get("games_lost")
+            goals_for = team_data.get("goals_for")
             goals_against = team_data.get("goals_against")
             points = team_data.get("points")
 
             # Insertar el equipo en la tabla "teams"
             cursor.execute(
-                "INSERT INTO teams (team_name, position, matches_played, games_won, games_matches, lost_games, goals_in_favor, goals_against, points) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                "INSERT INTO teams (team_name, position, matches_played, games_won, games_drawn, games_lost, goals_for, goals_against, points) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
                 (
                     team_name,
                     position,
                     matches_played,
                     games_won,
-                    games_matches,
-                    lost_games,
-                    goals_in_favor,
+                    games_drawn,
+                    games_lost,
+                    goals_for,
                     goals_against,
                     points,
                 ),
@@ -158,24 +158,24 @@ def update_positions():
             position = team_data.get("position")
             matches_played = team_data.get("matches_played")
             games_won = team_data.get("games_won")
-            games_matches = team_data.get("games_matches")
-            lost_games = team_data.get("lost_games")
-            goals_in_favor = team_data.get("goals_in_favor")
+            games_drawn = team_data.get("games_drawn")
+            games_lost = team_data.get("games_lost")
+            goals_for = team_data.get("goals_for")
             goals_against = team_data.get("goals_against")
             points = team_data.get("points")
 
             # Actualizar el equipo en la tabla "teams"
             if team_id:
                 cursor.execute(
-                    "UPDATE teams SET team_name = %s, position = %s, matches_played = %s, games_won = %s, games_matches = %s, lost_games = %s, goals_in_favor = %s, goals_against = %s, points = %s WHERE id = %s",
+                    "UPDATE teams SET team_name = %s, position = %s, matches_played = %s, games_won = %s, games_drawn = %s, games_lost = %s, goals_for = %s, goals_against = %s, points = %s WHERE id = %s",
                     (
                         team_name,
                         position,
                         matches_played,
                         games_won,
-                        games_matches,
-                        lost_games,
-                        goals_in_favor,
+                        games_drawn,
+                        games_lost,
+                        goals_for,
                         goals_against,
                         points,
                         team_id,
@@ -184,15 +184,15 @@ def update_positions():
             else:
                 # Insertar un nuevo equipo en la tabla "teams"
                 cursor.execute(
-                    "INSERT INTO teams (team_name, position, matches_played, games_won, games_matches, lost_games, goals_in_favor, goals_against, points) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                    "INSERT INTO teams (team_name, position, matches_played, games_won, games_drawn, games_lost, goals_for, goals_against, points) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
                     (
                         team_name,
                         position,
                         matches_played,
                         games_won,
-                        games_matches,
-                        lost_games,
-                        goals_in_favor,
+                        games_drawn,
+                        games_lost,
+                        goals_for,
                         goals_against,
                         points,
                     ),

@@ -5,9 +5,9 @@ teams = """
              position INT,
              matches_played INT,
              games_won INT,
-             games_matches INT,
-             lost_games INT,
-             goals_in_favor INT,
+             games_drawn INT,
+             games_lost INT,
+             goals_for INT,
              goals_against INT,
              points INT
         )
