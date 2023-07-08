@@ -1,5 +1,4 @@
 from flask import Blueprint, jsonify, request
-import json
 from db import db
 
 positions_bp = Blueprint("positions", __name__)
