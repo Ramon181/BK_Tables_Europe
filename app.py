@@ -10,10 +10,10 @@ CORS(app)
 app.register_blueprint(positions_bp)
 app.register_blueprint(teams_bp)
 app.register_blueprint(league_bp)
-create_tables()
 @app.route("/")
 def index():
     return "hola mundo"
 
 if __name__ == "__main__":
+    create_tables()
     app.run(debug=True)
