@@ -13,6 +13,7 @@ def db():
         user=environ.get("DB_USER", "root"),
         password=environ.get("DB_PASS", "12345"),
         database=environ.get("DB_NAME", "tablas_db"),
+        port=environ.get("DB_PORT", "3306"),
     )
     return data
 
